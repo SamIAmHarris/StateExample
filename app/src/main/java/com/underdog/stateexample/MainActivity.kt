@@ -3,7 +3,10 @@ package com.underdog.stateexample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
 import androidx.compose.material.TextField
@@ -15,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.underdog.stateexample.ui.theme.StateExampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +40,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DemoScreen() {
-    MyTextField()
+    Column {
+        MyTextField()
+        Spacer(modifier = Modifier.height(24.dp))
+        FunctionA()
+    }
 }
 
 @Composable
