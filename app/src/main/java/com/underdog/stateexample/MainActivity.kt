@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
+import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,23 +42,25 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DemoScreen() {
-    Column {
-        MyTextField()
-        Spacer(modifier = Modifier.height(24.dp))
-        FunctionA()
-    }
-}
-
-@Composable
-fun MyTextField() {
-    var textState by remember { mutableStateOf("") }
+    var textState by rememberSaveable { mutableStateOf("") }
 
     val onTextChange = { text: String ->
         textState = text
     }
 
+    Column {
+        MyTextField(text = textState, onTextChange = onTextChange)
+        Spacer(modifier = Modifier.height(24.dp))
+        FunctionA()
+        Spacer(modifier = Modifier.height(24.dp))
+        Text("You just typed: $textState")
+    }
+}
+
+@Composable
+fun MyTextField(text: String, onTextChange: (String) -> Unit) {
     TextField(
-        value = textState,
+        value = text,
         onValueChange = onTextChange
     )
 }
